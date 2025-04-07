@@ -1,0 +1,23 @@
+apiVersion: integreatly.org/v1alpha1
+kind: Grafana
+metadata:
+  name: grafana-a
+  namespace: openshift-user-workload-monitoring
+spec:
+  ingress:
+    enabled: true
+  config:
+    auth:
+      disable_signout_menu: false
+    security:
+      admin_user: ""
+      admin_password: ""
+  secrets:
+    - grafana-credentials
+  resources:
+    limits:
+      cpu: "500m"
+      memory: "512Mi"
+    requests:
+      cpu: "100m"
+      memory: "256Mi"

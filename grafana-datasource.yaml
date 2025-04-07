@@ -1,0 +1,27 @@
+
+---
+apiVersion: grafana.integreatly.org/v1beta1
+kind: GrafanaDatasource
+metadata:
+  name: grafanadatasource
+  namespace: openshift-user-workload-monitoring
+spec:
+  allowCrossNamespaceImport: false
+  datasource:
+    jsonData:
+      httpHeaderName1: Authorization
+      tlsSkipVerify: true
+    secureJsonData:
+      httpHeaderValue1: Bearer <PASTE_BEARER_TOKEN_HERE> # Replace with your actual token oc get secret -n openshift-user-workload-monitoring grafana-sa -o jsonpath='{.data.token}' | base64 --decode
+    access: proxy                                        #BEARER_TOKEN_NEW=$(oc -n openshift-user-workload-monitoring create token grafana-a-sa)
+    isDefault: true
+    name: prometheus
+    type: prometheus
+    url: 'https://thanos-querier-openshift-monitoring.apps.<local domain>:9091' # Replace with your actual URL oc -n openshift-monitoring get route thanos-querier -o jsonpath='{.spec.host}'
+  instanceSelector:
+    matchLabels:
+      dashboards: grafana-a
+  plugins:
+    - name: grafana-clock-panel
+      version: 1.3.0
+  resyncPeriod: 10m0s

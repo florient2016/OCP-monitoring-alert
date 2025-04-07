@@ -1,0 +1,14 @@
+apiVersion: route.openshift.io/v1
+kind: Route
+metadata:
+  name: grafana
+  namespace: openshift-user-workload-monitoring
+spec:
+  to:
+    kind: Service
+    name: grafana-a-service
+  port:
+    targetPort: 3000  # Update this if Grafana is using a different port
+  tls:
+    termination: edge
+    insecureEdgeTerminationPolicy: Redirect

@@ -1,0 +1,25 @@
+apiVersion: grafana.integreatly.org/v1beta1
+kind: GrafanaDashboard
+metadata:
+  name: grafana-dashboard-ocp-v
+  labels:
+    app: grafana-a
+spec:
+  instanceSelector:
+    matchLabels:
+      dashboards: grafana-a
+  folder: "Openshift GitOps (ArgoCD) Dashboard"      
+  url: https://raw.githubusercontent.com/komlan2019/argocd-ocp-monitoring/OpenshiftProjects.json
+---
+apiVersion: grafana.integreatly.org/v1beta1
+kind: GrafanaDashboard
+metadata:
+  name: grafana-dashboard-ocp-v2
+  labels:
+    app: grafana-a
+spec:
+  instanceSelector:
+    matchLabels:
+      dashboards: grafana-a
+  folder: "K8/Openshift Projects"
+  url: https://raw.githubusercontent.com/komlan2019/argocd-ocp-monitoring/OpenshiftGitOpsDashboard.json
